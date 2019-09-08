@@ -36,7 +36,7 @@ class Timer(BaseTimer):
         if self.is_paused:
             return self._pause_time - self._offset - self._start_time
 
-        return time.time() - self._start_time - self._offset
+        return time.perf_counter() - self._start_time - self._offset
 
     @time.setter
     def time(self, value: float):
@@ -64,19 +64,19 @@ class Timer(BaseTimer):
         return current, delta
 
     def start(self):
-        """Start the timer by recoding the current ``time.time()``
+        """Start the timer by recoding the current ``time.perf_counter()``
         preparing to report the number of seconds since this timestamp.
         """
         if self._start_time is None:
-            self._start_time = time.time()
+            self._start_time = time.perf_counter()
             self._last_frame = self._start_time
         else:
-            self._offset += time.time() - self._pause_time
+            self._offset += time.perf_counter() - self._pause_time
             self._pause_time = None
 
     def pause(self):
-        """Pause the timer by setting the internal pause time using ``time.time()``"""
-        self._pause_time = time.time()
+        """Pause the timer by setting the internal pause time using ``time.perf_counter()``"""
+        self._pause_time = time.perf_counter()
 
     def toggle_pause(self):
         """Toggle the paused state"""
@@ -92,5 +92,5 @@ class Timer(BaseTimer):
         Returns:
             Tuple[float, float]: Current position in the timer, actual running duration
         """
-        self._stop_time = time.time()
+        self._stop_time = time.perf_counter()
         return self._stop_time - self._start_time - self._offset, self._stop_time - self._start_time

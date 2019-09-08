@@ -305,7 +305,7 @@ class KeyboardCamera(Camera):
     def matrix(self) -> numpy.ndarray:
         """numpy.ndarray: The current view matrix for the camera"""
         # Use separate time in camera so we can move it when the demo is paused
-        now = time.time()
+        now = time.perf_counter()
         # If the camera has been inactive for a while, a large time delta
         # can suddenly move the camera far away from the scene
         t = max(now - self._last_time, 0)
