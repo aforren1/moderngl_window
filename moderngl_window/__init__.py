@@ -183,6 +183,7 @@ def run_window_config(config_cls: WindowConfig, timer=None, args=None) -> None:
         vsync=values.vsync,
         samples=values.samples if values.samples is not None else config_cls.samples,
         cursor=show_cursor if show_cursor is not None else True,
+        screen=values.screen,
     )
     window.print_context_info()
     activate_context(window=window)
@@ -250,6 +251,12 @@ def parse_args(args=None):
         type=valid_window_size_multiplier,
         default=1.0,
         help="Multiplier for the window size making it easy scale the window",
+    )
+    parser.add_argument(
+        '--screen',
+        type=int,
+        default=0,
+        help="Specify the screen to display on"
     )
 
     return parser.parse_args(args or sys.argv[1:])

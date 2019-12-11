@@ -10,6 +10,7 @@ WINDOW = {
     "vsync": True,
     "cursor": True,
     "samples": 0,
+    "screen": 0,
 }
 
 SCREENSHOT_PATH = None

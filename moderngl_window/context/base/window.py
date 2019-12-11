@@ -66,7 +66,7 @@ class BaseWindow:
 
     def __init__(self, title="ModernGL", gl_version=(3, 3), size=(1280, 720), resizable=True,
                  fullscreen=False, vsync=True, aspect_ratio: float = None, samples=4, cursor=True,
-                 **kwargs):
+                 screen=0, **kwargs):
         """Initialize a window instance.
 
         Args:
@@ -92,6 +92,7 @@ class BaseWindow:
         self._fixed_aspect_ratio = aspect_ratio
         self._samples = samples
         self._cursor = cursor
+        self._screen = screen
 
         # Callback functions
         self._render_func = dummy_func
@@ -345,6 +346,10 @@ class BaseWindow:
     @cursor.setter
     def cursor(self, value: bool):
         self._cursor = value
+    
+    @property
+    def screen(self) -> int:
+        return self._screen
 
     @property
     def mouse_exclusivity(self) -> bool:

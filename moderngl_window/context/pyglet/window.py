@@ -40,9 +40,10 @@ class Window(BaseWindow):
             samples=self.samples,
         )
 
+        screen=None
         if self.fullscreen:
             display = pyglet.canvas.get_display()
-            screen = display.get_default_screen()
+            screen = display.get_screens()[self.screen]
             self._width, self._height = screen.width, screen.height
 
         self._window = PygletWrapper(
@@ -52,6 +53,7 @@ class Window(BaseWindow):
             vsync=self.vsync,
             fullscreen=self.fullscreen,
             config=config,
+            screen=screen,
         )
 
         self.cursor = self._cursor
